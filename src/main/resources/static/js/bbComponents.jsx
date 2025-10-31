@@ -63,8 +63,8 @@ function BBCanvas() {
           p.fill(0);
           p.ellipse(p.mouseX, p.mouseY, 20, 20);
 
-          // Enviar punto por WS si está abierto 
-          if (comunicationWS.current?.wsocket?.readyState === WebSocket.OPEN) {
+          // Enviar punto por WS si está abierto
+          if (comunicationWS.current && comunicationWS.current.wsocket && comunicationWS.current.wsocket.readyState === WebSocket.OPEN) {
             comunicationWS.current.send(p.mouseX, p.mouseY);
           }
         } else {
@@ -83,7 +83,7 @@ function BBCanvas() {
       drawPoint(obj.x, obj.y);
     });
 
-    // Limpieza al desmontar 
+    // Limpieza al desmontar
     return function () {
       console.log("closing connection");
       try {
